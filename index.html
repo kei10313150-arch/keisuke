@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>住まいの安全チェック</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="page-header">
+        <p class="eyebrow">HOME SAFETY CHECK</p>
+        <h1>住まいの安全チェック</h1>
+        <p class="intro-copy">
+        写真から気になる兆候の候補を探します。画像だけでは見えない危険や、壁・配管の内部は判定できません。
+        結果は安全点検の代わりにはなりません。
+        </p>
+      </header>
+
+      <p class="emergency-note">
+        <strong>緊急時：</strong>
+        火・煙・火花・ガス臭などがある場合は、アプリの結果を待たずに現場から離れ、地域の緊急窓口や専門業者へ連絡してください。
+      </p>
+
+      <section class="panel upload-panel" aria-labelledby="upload-title">
+        <h2 id="upload-title">写真をアップロード</h2>
+        <label class="field-label" for="photo">確認したい場所を撮影、または写真を選択</label>
+        <input id="photo" type="file" accept="image/*" capture="environment" />
+        <p id="photo-name" class="photo-name">写真が選択されていません。</p>
+        <img id="preview" class="photo-preview" alt="選択した写真" hidden />
+        <button id="analyze" class="primary-button" type="button" disabled>写真を確認する</button>
+        <p id="status" class="status-line" role="status" aria-live="polite">写真を選んでください。</p>
+      </section>
+
+      <section class="panel" aria-labelledby="ai-title">
+        <h2 id="ai-title">写真から見つかった候補</h2>
+        <p class="section-note">
+          写真全体と4つの範囲ごとに、画像と説明文の近さを比べます。場所は大まかな目安です。
+          候補は確率、異常の確定、危険度の判定ではありません。
+        </p>
+        <h3>写真全体</h3>
+        <ol id="suggestions" class="result-list"></ol>
+        <h3>範囲ごとの候補</h3>
+        <ul id="areas" class="result-list area-list"></ul>
+      </section>
+
+      <section class="panel review-panel" aria-labelledby="review-title">
+        <h2 id="review-title">現場で確認できた兆候</h2>
+        <p class="section-note">写真に写っていないことも含め、実際に確認できた項目だけ選んでください。</p>
+        <fieldset class="observation-list">
+          <legend>該当する兆候</legend>
+          <label><input type="checkbox" data-level="3" /> <span>火や煙が出ている、または火花が散っている</span></label>
+          <label><input type="checkbox" data-level="3" /> <span>ガス臭・ガス漏れ、損傷したガス容器、熱源の近くのガス容器がある</span></label>
+          <label><input type="checkbox" data-level="3" /> <span>水がコンセント・配線・電気製品に触れている</span></label>
+          <label><input type="checkbox" data-level="2" /> <span>水漏れや水たまりがある（電気設備への接触はない）</span></label>
+          <label><input type="checkbox" data-level="2" /> <span>焦げ跡、傷んだ配線、異常に熱いコンセントがある</span></label>
+          <label><input type="checkbox" data-level="1" /> <span>コンセントの過負荷や、避難経路をふさぐ物がある</span></label>
+        </fieldset>
+        <h3 id="level" class="risk-level risk-unrated" role="status" aria-live="polite">危険度の目安：未評価</h3>
+        <p id="level-detail" class="risk-detail">確認できた兆候を選ぶと、目安を表示します。「該当なし」は安全の証明になりません。</p>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
